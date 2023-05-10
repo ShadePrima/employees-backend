@@ -1,21 +1,21 @@
 const express = require('express')
 const router = express.Router()
 const { auth } = require('../utils/auth')
-const { all, add } = require('../controllers/employees')
+const { all, add, remove, edit, employee } = require('../controllers/employees')
 
 // GET /api/employees
 router.get('/', auth, all)
 
 // GET /api/employees/:id
-router.get('/:id', auth, (req, res, next) => console.log('git singl employess'))
+router.get('/:id', auth, employee)
 
 // POST /api/employees/add
 router.post('/add', auth, add)
 
 //POST /api/employess/remove
-router.post('/remove/:id', auth, () => console.log('remove employess'))
+router.post('/remove/:id', auth, remove)
 
 //PUT /api/employess/edit
-router.put('/edit', auth, () => console.log('edit employees'))
+router.put('/edit', edit)
 
 module.exports = router
