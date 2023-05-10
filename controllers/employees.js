@@ -31,20 +31,16 @@ const add = async (req, res) => {
   try {
     const data = req.body
 
-    if (!data.firstName || !data.lastName || !data.adress || !data.age) {
+    if (!data.firstName || !data.lastName || !data.address || !data.age) {
       return res.status(400).json({
         message: 'All fields are required',
       })
     }
 
-    const employee = await prisma.user.update({
-      where: {
-        id: req.user.id,
-      },
+    const employee = await prisma.employee.create({
       data: {
-        createdEmployee: {
-          create: data,
-        },
+        ...data,
+        userId: req.user.id,
       },
     })
 
